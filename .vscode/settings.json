@@ -1,0 +1,11 @@
+{
+  "editor.formatOnSave": true,
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "files.exclude": {
+    "**/.git": true,
+    "node_modules": true,
+    ".vscode": true
+  },
+  "eslint.enable": true,
+  "eslint.validate": ["typescript"]
+}

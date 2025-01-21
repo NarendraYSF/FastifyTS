@@ -1,0 +1,232 @@
+openapi: 3.0.0
+info:
+  title: XyZ
+  version: 1.0.0
+  contact:
+    name: ItzNgga
+    url: 'https://github.com/ItzNgga/'
+    email: rangganak094@gmail.com
+  license:
+    name: MIT
+  description: XyZ API Example Docs
+servers:
+  - url: 'https://localhost:8080'
+paths:
+  /api/igstalk:
+    parameters: []
+    get:
+      summary: Stalk instagram profile
+      tags: []
+      responses:
+        '200':
+          description: User Found
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  username:
+                    type: string
+                    minLength: 1
+                  fullname:
+                    type: string
+                    minLength: 1
+                  biography:
+                    type: string
+                    minLength: 1
+                  private:
+                    type: string
+                    minLength: 1
+                  imageurl:
+                    type: string
+                    minLength: 1
+                  followers:
+                    type: string
+                    minLength: 1
+                  followed:
+                    type: string
+                    minLength: 1
+                  post:
+                    type: string
+                    minLength: 1
+                  highlight:
+                    type: string
+                    minLength: 1
+              examples:
+                Google:
+                  value:
+                    statusCode: 200
+                    message: sukses
+                    result:
+                      username: google
+                      fullname: Google
+                      biography: Google unfiltered—sometimes with filters.
+                      private: false
+                      imageurl: 'https://instagram.fcgk18-1.fna.fbcdn.net/v/t51.2885-19/s320x320/126151620_3420222801423283_6498777152086077438_n.jpg?tp=1&_nc_ht=instagram.fcgk18-1.fna.fbcdn.net&_nc_cat=1&_nc_ohc=kxVwVMj7YCUAX_hXpzf&edm=ABfd0MgAAAAA&ccb=7-4&oh=7993e14a1b8147d2a58181905d0d80b8&oe=608E5E31&_nc_sid=7bff83'
+                      followers: 12380558
+                      followed: 32
+                      post: 1515
+                      highlight: 6
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+        '400':
+          $ref: '#/components/responses/fieldMissing'
+        '401':
+          $ref: '#/components/responses/apiKeyError'
+      operationId: get-igstalk
+      description: Stalk instagram profile
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: username
+          description: Instagram username
+          required: true
+      security:
+        - apikey: []
+  /api/inspect:
+    parameters: []
+    post:
+      summary: Detect a lewd image
+      operationId: post-inspect
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: string
+                  result:
+                    type: object
+                    properties:
+                      Drawing:
+                        type: string
+                      Sexy:
+                        type: string
+                      Porn:
+                        type: string
+                      Neutral:
+                        type: string
+                      Hentai:
+                        type: string
+              examples:
+                Example:
+                  value:
+                    statusCode: 200
+                    message: sukses
+                    result:
+                      Drawing: 97%
+                      Sexy: 01%
+                      Porn: 01%
+                      Neutral: 01%
+                      Hentai: 01%
+        '400':
+          $ref: '#/components/responses/fieldMissing'
+        '401':
+          $ref: '#/components/responses/apiKeyError'
+      description: Detect a lewd image
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: object
+        description: Using file formdata
+      security:
+        - apikey: []
+components:
+  schemas: {}
+  securitySchemes:
+    apikey:
+      name: apikey
+      type: apiKey
+      in: query
+      description: ''
+  responses:
+    apiKeyError:
+      description: ApiKey invalid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: number
+              error:
+                type: string
+              message:
+                type: string
+          examples:
+            invalid:
+              value:
+                statusCode: 401
+                error: ApiKey
+                message: ApiKey tidak valid
+    fieldMissing:
+      description: Field Missing from Query
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: number
+              error:
+                type: string
+              message:
+                type: string
+          examples:
+            ApiKey:
+              value:
+                statusCode: 400
+                error: ApiKey
+                message: ApiKey Missing
+    userInvalid:
+      description: Invalid User
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: number
+              error:
+                type: string
+              message:
+                type: string
+          examples:
+            Invalid:
+              value:
+                statusCode: 4000
+                error: User
+                message: Invalid user
+    success:
+      description: Success response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: number
+              message:
+                type: string
+              result:
+                type: object
+          examples:
+            Contoh:
+              value:
+                statusCode: 0
+                message: string
+                result: {}
