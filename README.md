@@ -10,7 +10,7 @@ XAPI is optimized Api with Fastify Typescript with manual typings
 tsc
 ```
 
-- Copy _nsfw_model_ to _dist_
+- Copy _beta_model_ to _dist_
 
 ## Usage
 
