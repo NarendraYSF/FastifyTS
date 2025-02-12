@@ -7,7 +7,9 @@ type config = {
 	MONGO_USERNAME: string;
 	MONGO_PASSWORD: string;
 	MONGO_DATABASE: string;
+	
 };
+
 const config: config = {
 	LOG_LEVEL: <string>(<string>process.env.LOG_LEVEL) || 'info',
 	DEV_MODE: <boolean>(process.env.DEV_MODE === 'true' || false),
@@ -18,5 +20,6 @@ const config: config = {
 	MONGO_PASSWORD: <string>process.env.MONGO_PASSWORD,
 	MONGO_DATABASE: <string>process.env.MONGO_DATABASE,
 };
+
 /* GENERAL */
 export default config;
